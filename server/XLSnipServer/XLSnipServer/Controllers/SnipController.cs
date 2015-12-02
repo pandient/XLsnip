@@ -19,14 +19,14 @@ namespace XLSnipServer.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadRange()
+        public JsonResult UploadRange(String UserName , String Description , String Data)
         {
 
             return null;
         }
 
 
-        public JsonResult DownloadRange()
+        public JsonResult DownloadRange(int RangeId)
         {
             return null;
         }
