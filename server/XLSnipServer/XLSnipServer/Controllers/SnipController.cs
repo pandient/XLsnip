@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using XLSnipServer.Models;
+
 
 namespace XLSnipServer.Controllers
 {
@@ -32,14 +34,20 @@ namespace XLSnipServer.Controllers
 
         public ActionResult ListRanges()
         {
-            List<UserRange> ranges = null;
+            List<RangeModel> ranges = new List<RangeModel>() ;
             using (var context = new xlsnippingtoolEntities()){
-                ranges = context.UserRanges.ToList();
-                return Json(ranges, JsonRequestBehavior.AllowGet);
+                var qry = context.UserRanges.ToList();
+
+                foreach ( var item in qry){
+
+                    ranges.Add(new RangeModel() { Id = item.Id, Name = item.RangeName, Desc = item.Description});
+                }
+
+                
             }
 
 
-            return Json("list", JsonRequestBehavior.AllowGet);
+            return Json(ranges, JsonRequestBehavior.AllowGet);
         }
     }
 }
