@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\RangeDataModel.cs" />
     <Compile Include="Models\Ranges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeData.cs">
