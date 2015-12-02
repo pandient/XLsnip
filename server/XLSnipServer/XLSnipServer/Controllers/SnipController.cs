@@ -19,10 +19,26 @@ namespace XLSnipServer.Controllers
         }
 
         [HttpPost]
-        public JsonResult UploadRange(String UserName , String Description , String Data)
+        public JsonResult UploadRange(String UserName , String RangeName ,String Description , String Address,String Data )
         {
+            using (var context = new xlsnippingtoolEntities())
+            {
+                UserRange range = new UserRange();
+                range.Description = Description;
+                range.RangeName = RangeName;
+                range.UserId = 1;
+                context.UserRanges.Add(range);
+                context.SaveChanges();
+               
+                RangeData data = new RangeData();
+                data.Address = Address;
+                data.Data = Data;
+                data.RangeId = range.Id ;
+                context.RangeDatas.Add(data);
+                context.SaveChanges();
+            }
 
-            return null;
+            return Json("Sucess", JsonRequestBehavior.AllowGet) ;
         }
 
 

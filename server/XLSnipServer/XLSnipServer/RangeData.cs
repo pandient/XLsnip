@@ -17,7 +17,6 @@ namespace XLSnipServer
         public int Id { get; set; }
         public string Data { get; set; }
         public int RangeId { get; set; }
-    
-        public virtual UserRange UserRange { get; set; }
+        public string Address { get; set; }
     }
 }

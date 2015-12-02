@@ -9,169 +9,96 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Data" Type="nvarchar(max)" />
           <Property Name="RangeId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="UserRange">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RangeName" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="UserId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__User_Range">
-          <End Role="User" Type="Self.User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserRange" Type="Self.UserRange" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserRange">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__UserRange_Data">
-          <End Role="UserRange" Type="Self.UserRange" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="RangeData" Type="Self.RangeData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRange">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RangeData">
-              <PropertyRef Name="RangeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="xlsnippingtoolModelStoreContainer">
           <EntitySet Name="RangeData" EntityType="Self.RangeData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRange" EntityType="Self.UserRange" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__User_Range" Association="Self.FK__User_Range">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserRange" EntitySet="UserRange" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserRange_Data" Association="Self.FK__UserRange_Data">
-            <End Role="UserRange" EntitySet="UserRange" />
-            <End Role="RangeData" EntitySet="RangeData" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="xlsnippingtoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="UserRanges" Relationship="Self.FK__User_Range" FromRole="User" ToRole="UserRange" />
-        </EntityType>
-        <EntityType Name="UserRange">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="RangeName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK__User_Range" FromRole="UserRange" ToRole="User" />
-          <NavigationProperty Name="RangeDatas" Relationship="xlsnippingtoolModel.FK__UserRange_Data" FromRole="UserRange" ToRole="RangeData" />
-        </EntityType>
-        <Association Name="FK__User_Range">
-          <End Role="User" Type="Self.User" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Role="UserRange" Type="Self.UserRange" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserRange">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="xlsnippingtoolEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserRanges" EntityType="Self.UserRange" />
-          <AssociationSet Name="FK__User_Range" Association="Self.FK__User_Range">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserRange" EntitySet="UserRanges" />
-          </AssociationSet>
           <EntitySet Name="RangeDatas" EntityType="xlsnippingtoolModel.RangeData" />
-          <AssociationSet Name="FK__UserRange_Data" Association="xlsnippingtoolModel.FK__UserRange_Data">
-            <End Role="UserRange" EntitySet="UserRanges" />
-            <End Role="RangeData" EntitySet="RangeDatas" />
-          </AssociationSet>
+          <EntitySet Name="Users" EntityType="xlsnippingtoolModel.User" />
+          <EntitySet Name="UserRanges" EntityType="xlsnippingtoolModel.UserRange" />
         </EntityContainer>
         <EntityType Name="RangeData">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="RangeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UserRange" Relationship="xlsnippingtoolModel.FK__UserRange_Data" FromRole="RangeData" ToRole="UserRange" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="FK__UserRange_Data">
-          <End Type="xlsnippingtoolModel.UserRange" Role="UserRange" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
-          <End Type="xlsnippingtoolModel.RangeData" Role="RangeData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserRange">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="RangeData">
-              <PropertyRef Name="RangeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserRange">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RangeName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="xlsnippingtoolModelStoreContainer" CdmEntityContainer="xlsnippingtoolEntities">
+          <EntitySetMapping Name="RangeDatas">
+            <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
+              <MappingFragment StoreEntitySet="RangeData">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="RangeId" ColumnName="RangeId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="xlsnippingtoolModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRanges">
             <EntityTypeMapping TypeName="xlsnippingtoolModel.UserRange">
               <MappingFragment StoreEntitySet="UserRange">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="RangeName" ColumnName="RangeName" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="RangeDatas">
-            <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
-              <MappingFragment StoreEntitySet="RangeData">
-                <ScalarProperty Name="RangeId" ColumnName="RangeId" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RangeName" ColumnName="RangeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

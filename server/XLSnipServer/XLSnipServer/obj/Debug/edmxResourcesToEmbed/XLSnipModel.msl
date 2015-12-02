@@ -1,29 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="xlsnippingtoolModelStoreContainer" CdmEntityContainer="xlsnippingtoolEntities">
+    <EntitySetMapping Name="RangeDatas">
+      <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
+        <MappingFragment StoreEntitySet="RangeData">
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="RangeId" ColumnName="RangeId" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="xlsnippingtoolModel.User">
         <MappingFragment StoreEntitySet="User">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserRanges">
       <EntityTypeMapping TypeName="xlsnippingtoolModel.UserRange">
         <MappingFragment StoreEntitySet="UserRange">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="RangeName" ColumnName="RangeName" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RangeDatas">
-      <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
-        <MappingFragment StoreEntitySet="RangeData">
-          <ScalarProperty Name="RangeId" ColumnName="RangeId" />
-          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RangeName" ColumnName="RangeName" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

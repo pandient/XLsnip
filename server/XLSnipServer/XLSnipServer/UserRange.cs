@@ -14,17 +14,9 @@ namespace XLSnipServer
     
     public partial class UserRange
     {
-        public UserRange()
-        {
-            this.RangeDatas = new HashSet<RangeData>();
-        }
-    
         public int Id { get; set; }
         public string RangeName { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
-    
-        public virtual User User { get; set; }
-        public virtual ICollection<RangeData> RangeDatas { get; set; }
     }
 }
