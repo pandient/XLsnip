@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="xlsnippingtoolModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="RangeData">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Data" Type="nvarchar(max)" />
+    <Property Name="RangeId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="UserRange">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="RangeName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__User_Range">
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="UserRange" Type="Self.UserRange" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRange">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRange_Data">
+    <End Role="UserRange" Type="Self.UserRange" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RangeData" Type="Self.RangeData" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRange">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RangeData">
+        <PropertyRef Name="RangeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="xlsnippingtoolModelStoreContainer">
+    <EntitySet Name="RangeData" EntityType="Self.RangeData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRange" EntityType="Self.UserRange" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__User_Range" Association="Self.FK__User_Range">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserRange" EntitySet="UserRange" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRange_Data" Association="Self.FK__UserRange_Data">
+      <End Role="UserRange" EntitySet="UserRange" />
+      <End Role="RangeData" EntitySet="RangeData" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
