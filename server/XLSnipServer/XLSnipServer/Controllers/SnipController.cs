@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using XLSnipServer.Models;
+using Newtonsoft.Json;
 
 
 namespace XLSnipServer.Controllers
@@ -44,13 +45,26 @@ namespace XLSnipServer.Controllers
 
         public JsonResult DownloadRange(int RangeId)
         {
-            return null;
+            RangeDataModel rDataModel = new RangeDataModel();
+            using (var context = new xlsnippingtoolEntities())
+            {
+                var qry = context.RangeDatas.ToList().Where(x => x.RangeId.Equals(RangeId));
+                RangeData data = qry.FirstOrDefault();
+                if (data == null)
+                {
+                    return null;
+                }
+                String[][] rData = JsonConvert.DeserializeObject<String[][]>(data.Data);
+                rDataModel.Address = data.Address;
+                rDataModel.Data = rData;
+            }
+            return Json(rDataModel, JsonRequestBehavior.AllowGet);
         }
 
 
         public ActionResult ListRanges()
         {
-            List<RangeModel> ranges = new List<RangeModel>() ;
+            List<RangeModel> ranges = new List<RangeModel>();
             using (var context = new xlsnippingtoolEntities()){
                 var qry = context.UserRanges.ToList();
 
