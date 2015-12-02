@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CXlService.cs" />
     <Compile Include="Entites\Entity.cs" />
+    <Compile Include="Entites\RangeDataEntity.cs" />
     <Compile Include="Entites\RangeEntity.cs" />
     <Compile Include="Models\RangeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

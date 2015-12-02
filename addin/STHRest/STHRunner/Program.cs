@@ -10,8 +10,20 @@ namespace STHRunner
     {
         static void Main(string[] args)
         {
-            var entity = new RangeEntity();
-            var data = entity.GetRanges();
+         //   var entity = new RangeEntity();
+        //    var data = entity.GetRanges();
+
+            var data2 = new string[2][];
+            data2[0] = new String[] { "1", "2"};
+            data2[1] = new String[] { "3", "4"};
+
+
+            var entity2 = new RangeDataEntity();
+            entity2.UploadRange("Guest", "TestRange", "foobar", "$A1:$B2", data2);
+
+
+            var entity3 = new RangeDataEntity();
+            var result = entity2.DownLoadRange(4);
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Net;
 using System.IO;
+using System.Collections.Specialized;
 
 namespace STHRest.Entites
 {
@@ -33,6 +34,26 @@ namespace STHRest.Entites
                 throw;
             }
         }
+
+
+         public string PostData(string url , Dictionary<String, String> data)
+         {
+             using (var client = new WebClient())
+             {
+                 var values = new NameValueCollection();
+
+                 foreach (var param in data)
+                 {
+                     values.Add(param.Key, param.Value);
+                 }
+
+
+                 var response = client.UploadValues(url, values);
+
+                 var responseString = Encoding.Default.GetString(response);
+                 return responseString;
+             }
+         }
 
     }
 }
