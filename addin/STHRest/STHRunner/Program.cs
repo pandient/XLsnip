@@ -10,8 +10,8 @@ namespace STHRunner
     {
         static void Main(string[] args)
         {
-         //   var entity = new RangeEntity();
-        //    var data = entity.GetRanges();
+            var entity = new RangeEntity();
+            var data = entity.GetRanges();
 
             var data2 = new string[2][];
             data2[0] = new String[] { "1", "2"};

@@ -7,9 +7,10 @@ using Newtonsoft.Json;
 
 namespace STHRest.Entites
 {
+
     public class RangeEntity : Entity
     {
-        string LIST_RANGE_URL = "http://localhost:57555/snip/listranges";
+        string LIST_RANGE_URL = "http://spotfire-server.zepower.com:8080/snip/snip/listranges";
 
         public List<RangeModel> GetRanges(){
 

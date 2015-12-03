@@ -9,8 +9,8 @@ namespace STHRest.Entites
 {
     public class RangeDataEntity : Entity
     {
-        String UPLOAD_URL = "http://localhost:57555/snip/UploadRange";
-        String DOWNLOAD_URL = "http://localhost:57555/snip/DownloadRange";
+        String UPLOAD_URL = "http://spotfire-server.zepower.com:8080/snip/snip/UploadRange";
+        String DOWNLOAD_URL = "http://spotfire-server.zepower.com:8080/snip/snip/DownloadRange";
 
         public string UploadRange(String UserName, String RangeName, String Description, String Address, String[][] Data)
         {
