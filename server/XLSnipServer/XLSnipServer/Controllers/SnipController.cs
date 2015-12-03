@@ -154,18 +154,18 @@ namespace XLSnipServer.Controllers
         public ActionResult ListRanges()
         {
             List<RangeModel> ranges = new List<RangeModel>();
-            using (var context = new xlsnippingtoolEntities()){
+            using (var context = new xlsnippingtoolEntities())
+            {
                 var qry = context.UserRanges.ToList();
-
-                foreach ( var item in qry){
-
-                    ranges.Add(new RangeModel() { Id = item.Id, Name = item.RangeName, Desc = item.Description});
+                var usersList = context.Users.ToList();
+                foreach ( var item in qry)
+                {
+                    var qryUser = usersList.Where(x => x.Id.Equals(item.UserId));
+                    User userEntity = qryUser.FirstOrDefault();
+                    string userName = userEntity != null ? userEntity.Name : "unknown";
+                    ranges.Add(new RangeModel() { Id = item.Id, Name = item.RangeName, Desc = item.Description, UserName = userName});
                 }
-
-                
             }
-
-
             return Json(ranges, JsonRequestBehavior.AllowGet);
         }
     }
