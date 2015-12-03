@@ -27,24 +27,59 @@ namespace XLSnipServer.Controllers
         {
             using (var context = new xlsnippingtoolEntities())
             {
-               
+                var qryUser = context.Users.Where(x => x.Name.Equals(UserName));
+                User userEntity= qryUser.FirstOrDefault();
+                if (userEntity == null)
+                {
+                    userEntity = new User() { Name = UserName };
+                    context.Users.Add(userEntity);
+                    context.SaveChanges();
+                }
+                var qryUserRange = context.UserRanges.Where(x => x.RangeName.Equals(RangeName) && x.UserId.Equals(userEntity.Id));
+                UserRange UserRangeEntity = qryUserRange.FirstOrDefault();
+                if (UserRangeEntity == null)
+                {
+                    UserRange range = new UserRange();
+                    range.Description = Description;
+                    range.RangeName = RangeName;
+                    range.UserId = userEntity.Id;
+                    context.UserRanges.Add(range);
+                    context.SaveChanges();
 
-                UserRange range = new UserRange();
-                range.Description = Description;
-                range.RangeName = RangeName;
-                range.UserId = 1;
-                context.UserRanges.Add(range);
-                context.SaveChanges();
-               
-                RangeData data = new RangeData();
-                data.Address = Address;
-                data.Data = Data;
-                data.RangeId = range.Id ;
-                context.RangeDatas.Add(data);
-                context.SaveChanges();
+                    RangeData data = new RangeData();
+                    data.Address = Address;
+                    data.Data = Data;
+                    data.RangeId = range.Id;
+                    context.RangeDatas.Add(data);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    //update
+                    UserRangeEntity.RangeName = RangeName;
+                    UserRangeEntity.Description = Description;
+                    context.SaveChanges();
+
+                    var qryRangeData = context.RangeDatas.Where(x => x.RangeId.Equals(UserRangeEntity.Id));
+                    RangeData rData = qryRangeData.FirstOrDefault();
+                    if (rData == null)
+                    {
+                        rData = new RangeData();
+                        rData.Address = Address;
+                        rData.Data = Data;
+                        rData.RangeId = userEntity.Id;
+                        context.RangeDatas.Add(rData);
+                    }
+                    else
+                    {
+                        rData.Data = Data;
+                        rData.Address = Address;
+                    }
+                    context.SaveChanges();
+                }
+                
             }
-
-            return Json("Sucess", JsonRequestBehavior.AllowGet) ;
+            return Json("Success", JsonRequestBehavior.AllowGet) ;
         }
 
 
