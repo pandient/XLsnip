@@ -27,7 +27,6 @@
 	Next
 	
 	If i > xl.Addins.Count Then
-		wscript.Echo strCurDir
 		xl.Workbooks.Open(strCurDir + "\XLRangeLoader.xlam")
 		XL.Workbooks("XLRangeLoader.xlam").RunAutoMacros 1
 	End If

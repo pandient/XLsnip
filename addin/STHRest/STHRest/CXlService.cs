@@ -18,12 +18,39 @@ namespace STHRest
         { 
         }
 
-        public RangeModel[] GetRangeList()
+        //public RangeModel[] GetRangeList()
+        //{
+        //    RangeEntity entity = new RangeEntity();
+        //    List<RangeModel> ranges = entity.GetRanges();
+
+        //    return ranges.ToArray();
+        public string GetRangeList()
         {
             RangeEntity entity = new RangeEntity();
-            List<RangeModel> ranges = entity.GetRanges();
+            List<RangeModel> result = entity.GetRanges();
 
-            return ranges.ToArray();
+            string fileName = GetTempName();
+
+            using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
+                {
+                    sw.WriteLine(result.Count.ToString());
+                    sw.WriteLine();
+
+                    for (int r = 0; r < result.Count; r++)
+                    {
+                        sw.WriteLine(result[r].Id.ToString());
+                        sw.WriteLine(result[r].Name);
+                        sw.WriteLine(result[r].Desc);
+                        sw.WriteLine(result[r].UserName);
+                    }
+
+                    sw.Close();
+                }
+            }
+
+            return fileName;
         }
 
         public string UploadRange(string user, string name, string desc, string xlAddress, string fileName)
@@ -55,12 +82,19 @@ namespace STHRest
             }
 
             result = entity.UploadRange(user, name, desc, xlAddress, data);
+            File.Delete(fileName);
+
             return result;
+        }
+
+        private string GetTempName()
+        {
+            return Path.GetTempPath() + "STH" + DateTime.Now.ToString("yyyymmdd hhnnss") + ".txt";
         }
 
         public string DownloadRange(int id)
         {
-            string fileName = Path.GetTempPath() + "STH" + DateTime.Now.ToString("yyyymmdd hhnnss") + ".txt";
+            string fileName = GetTempName();
 
             RangeDataEntity entity = new RangeDataEntity();
             RangeDataModel result = entity.DownLoadRange(id);
