@@ -16,7 +16,7 @@
 	For i = 1 To xl.Addins.Count
 		Set a = xl.Addins.item(i)
 		nm = UCase(a.Name)
-		If nm = "HACKTHON.XLAM" Then
+		If nm = ucase("XLRangeLoader.XLAM") Then
 			if a.Installed = false then
 				a.Installed = true
 			End If
@@ -28,8 +28,8 @@
 	
 	If i > xl.Addins.Count Then
 		wscript.Echo strCurDir
-		xl.Workbooks.Open(strCurDir + "\Hackthon.xlam")
-		XL.Workbooks("hackthon.xlam").RunAutoMacros 1
+		xl.Workbooks.Open(strCurDir + "\XLRangeLoader.xlam")
+		XL.Workbooks("XLRangeLoader.xlam").RunAutoMacros 1
 	End If
 	
 	xl.Quit

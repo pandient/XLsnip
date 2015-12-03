@@ -10,7 +10,7 @@
 	For i = 1 To xl.Addins.Count
 		Set a = xl.Addins.item(i)
 		nm = UCase(a.Name)
-		If nm = "HACKTHON.XLAM" Then
+		If nm = ucase("XLRangeLoader.XLAM") Then
 			if a.Installed = true then
 				a.Installed = false
 			End If
