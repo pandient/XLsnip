@@ -18,5 +18,6 @@ namespace XLSnipServer
         public string RangeName { get; set; }
         public string Description { get; set; }
         public int UserId { get; set; }
+        public Nullable<System.DateTime> LastModified { get; set; }
     }
 }

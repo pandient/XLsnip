@@ -27,6 +27,8 @@ namespace XLSnipServer.Controllers
         {
             using (var context = new xlsnippingtoolEntities())
             {
+               
+
                 UserRange range = new UserRange();
                 range.Description = Description;
                 range.RangeName = RangeName;
