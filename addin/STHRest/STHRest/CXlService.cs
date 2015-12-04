@@ -97,7 +97,7 @@ namespace STHRest
             string fileName = GetTempName();
 
             RangeDataEntity entity = new RangeDataEntity();
-            RangeDataModel result = entity.DownLoadRange(id);
+            RangeDataModel result = entity.DownloadRange(id);
 
             using (FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.Write, FileShare.None))
             {
