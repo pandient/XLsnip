@@ -30,6 +30,7 @@
           <Property Name="Description" Type="nvarchar" MaxLength="100" />
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="datetime" />
+          <Property Name="AllowedUsers" Type="nvarchar(max)" />
         </EntityType>
         <EntityContainer Name="xlsnippingtoolModelStoreContainer">
           <EntitySet Name="RangeData" EntityType="Self.RangeData" Schema="dbo" store:Type="Tables" />
@@ -41,19 +42,10 @@
     <edmx:ConceptualModels>
       <Schema Namespace="xlsnippingtoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="xlsnippingtoolEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="RangeDatas" EntityType="xlsnippingtoolModel.RangeData" />
           <EntitySet Name="Users" EntityType="xlsnippingtoolModel.User" />
           <EntitySet Name="UserRanges" EntityType="xlsnippingtoolModel.UserRange" />
+          <EntitySet Name="RangeDatas" EntityType="xlsnippingtoolModel.RangeData" />
         </EntityContainer>
-        <EntityType Name="RangeData">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="RangeId" Type="Int32" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -70,6 +62,16 @@
           <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="AllowedUsers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RangeData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RangeId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -77,16 +79,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="xlsnippingtoolModelStoreContainer" CdmEntityContainer="xlsnippingtoolEntities">
-          <EntitySetMapping Name="RangeDatas">
-            <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
-              <MappingFragment StoreEntitySet="RangeData">
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="RangeId" ColumnName="RangeId" />
-                <ScalarProperty Name="Data" ColumnName="Data" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="xlsnippingtoolModel.User">
               <MappingFragment StoreEntitySet="User">
@@ -98,10 +90,21 @@
           <EntitySetMapping Name="UserRanges">
             <EntityTypeMapping TypeName="xlsnippingtoolModel.UserRange">
               <MappingFragment StoreEntitySet="UserRange">
+                <ScalarProperty Name="AllowedUsers" ColumnName="AllowedUsers" />
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="RangeName" ColumnName="RangeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RangeDatas">
+            <EntityTypeMapping TypeName="xlsnippingtoolModel.RangeData">
+              <MappingFragment StoreEntitySet="RangeData">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="RangeId" ColumnName="RangeId" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

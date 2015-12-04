@@ -25,8 +25,8 @@ namespace XLSnipServer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<RangeData> RangeDatas { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRange> UserRanges { get; set; }
+        public virtual DbSet<RangeData> RangeDatas { get; set; }
     }
 }
