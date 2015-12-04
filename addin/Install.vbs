@@ -16,7 +16,7 @@
 	For i = 1 To xl.Addins.Count
 		Set a = xl.Addins.item(i)
 		nm = UCase(a.Name)
-		If nm = ucase("XLRangeLoader.XLAM") Then
+		If nm = ucase("XLSnipping.XLAM") Then
 			if a.Installed = false then
 				a.Installed = true
 			End If
@@ -27,8 +27,8 @@
 	Next
 	
 	If i > xl.Addins.Count Then
-		xl.Workbooks.Open(strCurDir + "\XLRangeLoader.xlam")
-		XL.Workbooks("XLRangeLoader.xlam").RunAutoMacros 1
+		xl.Workbooks.Open(strCurDir + "\XLSnipping.xlam")
+		XL.Workbooks("XLSnipping.xlam").RunAutoMacros 1
 	End If
 	
 	xl.Quit
