@@ -26,7 +26,7 @@ namespace STHRunner
             //var result = entity2.DownLoadRange(4);
 
             var entity = new RangeEntity();
-            var data = entity.GetMyRanges("tony.lei");
+            var data = entity.GetMyRanges("tonyj.lei");
 
             var data2 = new string[2][];
             data2[0] = new String[] { "1", "2" };
