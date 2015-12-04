@@ -27,7 +27,7 @@ namespace STHRest
         public string GetRangeList()
         {
             RangeEntity entity = new RangeEntity();
-            List<RangeModel> result = entity.GetRanges();
+            List<RangeModel> result = entity.GetMyRanges(Environment.UserName);
 
             string fileName = GetTempName();
 
@@ -53,7 +53,7 @@ namespace STHRest
             return fileName;
         }
 
-        public string UploadRange(string user, string name, string desc, string xlAddress, string fileName)
+        public string UploadRange(string name, string desc, string xlAddress, ref string []allowedUsers, string fileName)
         {
             RangeDataEntity entity = new RangeDataEntity();
             string result;
@@ -81,7 +81,7 @@ namespace STHRest
                 }
             }
 
-            result = entity.UploadRange(user, name, desc, xlAddress, data);
+            result = entity.TargetedUploadRange(Environment.UserName, name, desc, xlAddress, data, allowedUsers);
             File.Delete(fileName);
 
             return result;
